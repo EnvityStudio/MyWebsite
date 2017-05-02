@@ -1,0 +1,209 @@
+﻿
+-- CHƯƠNG TRÌNH QUẢN LÝ BÁN BÁNH
+-- Copyright (C) 2017 Phan Huy Dũng <phanhuydungcao@gmail.com>. Lớp TH13B. Mã SV: zxxxxxxx
+USE master
+GO
+
+ALTER DATABASE Web_Bakery SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+GO
+
+IF DB_ID('Web_Bakery') IS NOT NULL
+ DROP DATABASE Web_Bakery
+GO
+CREATE DATABASE Web_Bakery
+GO
+
+USE Web_Bakery
+GO
+
+
+-- Tạo bảng DANH_MUC
+IF OBJECT_ID('dbo.DANH_MUC', 'U') IS NOT NULL
+ DROP TABLE [dbo].[DANH_MUC]
+GO
+CREATE TABLE [dbo].[DANH_MUC] 
+( 
+	MaDM INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	TenDM NVARCHAR(255) NOT NULL,
+	DmCha INT NULL DEFAULT(0),
+	ThuTu INT NOT NULL,
+	TrangThai BIT NOT NULL
+
+)
+ON [PRIMARY]
+GO
+
+
+-- Tạo bảng ADMIN
+IF OBJECT_ID('dbo.ADMIN', 'U') IS NOT NULL
+ DROP TABLE [dbo].[ADMIN]
+GO
+CREATE TABLE [dbo].[ADMIN] 
+( 
+	MaAdmin INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	TenDN VARCHAR(50) NOT NULL,
+	MatKhau VARCHAR(50) NOT NULL
+)
+ON [PRIMARY]
+GO
+
+
+-- Tạo bảng KHACH_HANG
+IF OBJECT_ID('dbo.KHACH_HANG', 'U') IS NOT NULL
+ DROP TABLE [dbo].[KHACH_HANG]
+GO
+CREATE TABLE [dbo].[KHACH_HANG] 
+( 
+	MaKH INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	TenKH NVARCHAR(50) NOT NULL,
+	DiaChi NVARCHAR(255) NOT NULL,
+	SDT VARCHAR(11) NOT NULL,
+	TrangThai BIT 
+)
+ON [PRIMARY]
+GO
+
+
+
+-- Tạo bảng DON_HANG
+IF OBJECT_ID('dbo.DON_HANG', 'U') IS NOT NULL
+ DROP TABLE [dbo].[DON_HANG]
+GO
+CREATE TABLE [dbo].[DON_HANG] 
+( 
+	MaDH INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	MaKH INT REFERENCES KHACH_HANG(MaKH) NOT NULL,
+	TongTien DECIMAL,
+	Ngay DATETIME,
+	TrangThai BIT
+
+)
+ON [PRIMARY]
+GO
+
+
+-- Tạo bảng SAN_PHAM
+IF OBJECT_ID('dbo.SAN_PHAM', 'U') IS NOT NULL
+ DROP TABLE [dbo].[SAN_PHAM]
+GO
+CREATE TABLE [dbo].[SAN_PHAM] 
+( 
+	MaSP INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	TenSP NVARCHAR(50) NOT NULL,
+	DonGia INT NOT NULL,
+	TrangThai BIT,
+	NoiBat BIT,
+	HinhAnh NVARCHAR(255) NOT NULL,
+	MoTa NVARCHAR(255) NOT NULL,
+	ChiTiet TEXT NOT NULL,
+	MaDM INT REFERENCES DANH_MUC(MaDM) NOT NULL
+)
+ON [PRIMARY]
+GO
+
+
+-- Tạo bảng DON_HANG_CT
+IF OBJECT_ID('dbo.DON_HANG_CT', 'U') IS NOT NULL
+ DROP TABLE [dbo].[DON_HANG_CT]
+GO
+CREATE TABLE [dbo].[DON_HANG_CT] 
+(
+	MaSP INT REFERENCES SAN_PHAM(MaSP) NOT NULL,
+	MaDH INT REFERENCES DON_HANG(MaDH) NOT NULL,
+	PRIMARY KEY(MaSP,MaDH),
+	SoLuong  INT NOT NULL,
+	DonGia INT NOT NULL
+)
+ON [PRIMARY]
+GO
+
+
+-- Tạo bảng BLOG
+IF OBJECT_ID('dbo.BLOG', 'U') IS NOT NULL
+ DROP TABLE [dbo].[BLOG]
+GO
+CREATE TABLE [dbo].[BLOG] 
+( 
+	MaBlog INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	TieuDe NVARCHAR(255) NOT NULL,
+	HinhAnh NVARCHAR(255) NOT NULL,
+	NoiDung TEXT NOT NULL,
+	NoiBat BIT NOT NULL,
+	NgayDang DATE NOT NULL
+)
+ON [PRIMARY]
+GO
+
+
+-- Tạo bảng LIEN_HE
+IF OBJECT_ID('dbo.LIEN_HE', 'U') IS NOT NULL
+ DROP TABLE [dbo].[LIEN_HE]
+GO
+CREATE TABLE [dbo].[LIEN_HE] 
+( 
+	MaLH INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	TieuDe NVARCHAR(255) NOT NULL,
+	NoiDung TEXT NOT NULL,
+	TenKH NVARCHAR(50) NOT NULL,
+	SDT CHAR(11) NOT NULL,
+	TrangThai BIT NOT NULL,
+	NgayDang DATETIME NOT NULL
+)
+ON [PRIMARY]
+GO
+
+
+
+ALTER DATABASE Web_Bakery SET MULTI_USER
+GO
+/*Reset Identity */
+DBCC CHECKIDENT ('[TestTable]', RESEED, 0);
+GO
+
+DBCC CHECKIDENT ('DANH_MUC', RESEED, 0);
+DBCC CHECKIDENT ('SAN_PHAM', RESEED, 0);
+GO
+
+insert into DANH_MUC(TenDM,ThuTu,TrangThai) values(N'Bánh Đức',1,1)
+insert into DANH_MUC(TenDM,ThuTu,TrangThai) values(N'Bánh Nhật',2,1)
+insert into DANH_MUC(TenDM,ThuTu,TrangThai) values(N'Bánh Pháp',3,1)
+insert into DANH_MUC(TenDM,ThuTu,TrangThai) values(N'Bánh Italia',4,1)
+
+INSERT INTO SAN_PHAM(TenSP,DonGia,HinhAnh,ChiTiet,MaDM,MoTa,NoiBat,TrangThai)
+VALUES(N'Bienenstich',110000,'~/Content/images/Products/Duc/Bienenstich/Bienenstich_1.jpg',N'Chi tiết của Bienestich',2,N'Mô tả',1,1)
+INSERT INTO SAN_PHAM(TenSP,DonGia,HinhAnh,ChiTiet,MaDM,MoTa,NoiBat,TrangThai)
+VALUES(N'Baukuchen',100000,'~/Content/images/Products/Duc/Baukuchen/Baumkuchen_1.jpg',N'Chi tiết của Baukuchen',2,N'Mô tả',1,1)
+
+-- PROCEDURE:
+-- Proc Login_Admin:
+IF OBJECT_ID ( 'PROC_Admin_Login', 'P' ) IS NOT NULL
+ DROP PROCEDURE [PROC_Admin_Login];
+GO
+CREATE PROCEDURE [PROC_Admin_Login]	
+ @userName VARCHAR(50),
+ @passWord VARCHAR(50)
+AS
+BEGIN
+	DECLARE @COUNT INT
+	DECLARE @RES BIT
+	SELECT @COUNT = COUNT(*) FROM [ADMIN] WHERE TenDN = @userName AND MatKhau = @passWord
+	IF(@COUNT>0)
+		SET @RES = 1
+	ELSE
+		SET @RES = 0
+
+	SELECT @RES
+END
+GO
+
+EXEC PROC_Admin_Login 'admin', '1234567'
+
+-- Procedure lấy ra danh sách danh mục:
+IF OBJECT_ID ( 'PROC_DANHMUC_LIST', 'P' ) IS NOT NULL
+ DROP PROCEDURE [PROC_DANHMUC_LIST];
+GO
+CREATE PROCEDURE [PROC_DANHMUC_LIST]	
+AS
+  SELECT * FROM DANH_MUC WHERE TrangThai = 1 ORDER BY ThuTu ASC
+GO
+

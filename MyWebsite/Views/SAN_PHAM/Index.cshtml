@@ -1,0 +1,83 @@
+﻿@*@model IEnumerable<MyWebsite.Entities.SAN_PHAM>*@
+@using MyWebsite.Models.Bean
+@model IEnumerable<MyWebsite.DTO.ProductDTO>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Đơn giá
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th>
+            Nổi bật
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th>
+            Tên danh mục
+        </th>
+        <th>
+            Thao tác
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiBat)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.MoTa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenDM)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaSP }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaSP }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaSP }) | 
+            @Html.ActionLink("Mua","Add","BakeryCart",new { id = item.MaSP},null)
+        </td>
+    </tr>
+}
+</table>
+
+@{
+    double TotalMoney = 0;
+    double TotalAmount = 0;
+
+    BakeryCart Cart = (BakeryCart)Session["cart"];
+
+    if (Cart != null)
+    {
+        TotalAmount = Cart.getAmount();
+        TotalMoney = Cart.getTotalCart();
+    }
+ }
+<h1>So luong: @TotalAmount</h1>
+<h1>Tong tien: @TotalMoney</h1>

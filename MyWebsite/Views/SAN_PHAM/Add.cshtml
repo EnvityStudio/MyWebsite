@@ -1,0 +1,16 @@
+﻿@using MyWebsite.Entities
+@model MyWebsite.Entities.SAN_PHAM
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+<form action="addAction" method="post">
+    ten: <input type="text" name="ten">
+    danh mục: <select name="CatID">
+                @foreach(var item in Model)
+                {
+                    <option value="@item.ID">@item.Name</option>
+                }
+            </select>
+    <input type="submit" value="thêm"/>
+</form>

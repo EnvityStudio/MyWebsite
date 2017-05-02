@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MyWebsite.Models.Bean.ItemCart>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<table border="1">
+    <thead>
+        <tr>
+            <td>Ten</td>
+            <td>So luong</td>
+            <td>Thanh tien</td>
+            <td>Chuc nang</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Amount</td>
+                <td>@item.getTotal()</td>
+                <td><a href="Delete/@item.ID"></a>Xoá</td>
+            </tr>
+        }
+        
+    </tbody>    
+</table>
+

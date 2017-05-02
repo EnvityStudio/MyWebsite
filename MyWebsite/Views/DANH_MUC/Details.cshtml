@@ -1,0 +1,51 @@
+﻿@model MyWebsite.Entities.DANH_MUC
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DANH_MUC</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DmCha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DmCha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThuTu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThuTu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaDM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
