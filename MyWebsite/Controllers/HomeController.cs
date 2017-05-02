@@ -14,6 +14,9 @@ namespace MyWebsite.Controllers
         {
             ProductDAO pro = new ProductDAO();
             ViewBag.p = pro.ListProductFeatured();
+            ViewBag.listArrivals = pro.ListNewArrivals();
+            ViewBag.listRandom = pro.ListRandom();
+            ViewBag.listCheapest = pro.ListCheapest();
             return View();
         }
         public ActionResult Footer()

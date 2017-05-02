@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyWebsite.Models;
+using MyWebsite.Models.DAO;
 
 namespace MyWebsite.Controllers
 {
@@ -16,20 +17,14 @@ namespace MyWebsite.Controllers
         }
         public ActionResult Detail(int id)
         {
-            ViewBag.a = Category.getAll();
-            ViewBag.b = Category.getAll2();
-            ViewBag.p = Product.getList();
-            Product x = Product.getProduct(id);
-            return View(x);
+            ProductDAO pro = new ProductDAO();
+            return View(pro.FindProductByID(id));
         }
         public ActionResult List(int id)
         {
-            ViewBag.a = Category.getAll();
-            ViewBag.b = Category.getAll2();
-            ViewBag.p = Product.getList();
-            List<Product> x = Product.getList(id);
-            
-            return View(x);
+            ProductDAO dao = new ProductDAO();
+            return View(dao.ListProductByCatID(id));
         }
+
     }
 }

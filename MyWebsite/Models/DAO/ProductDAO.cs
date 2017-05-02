@@ -14,7 +14,7 @@ namespace MyWebsite.Models.DAO
         {
             db = new MyDbContext();
         }
-        public int InsertProduct(string tenSP, int donGia,bool trangThai, bool noiBat, string hinhAnh, string moTa, string chiTiet, int maDM)
+        public int InsertProduct(string tenSP, int donGia, bool trangThai, bool noiBat, string hinhAnh, string moTa, string chiTiet, int maDM)
         {
             SAN_PHAM sp = new SAN_PHAM();
             sp.TenSP = tenSP;
@@ -47,7 +47,7 @@ namespace MyWebsite.Models.DAO
         {
             var res = (from p in db.SAN_PHAM
                        where p.TrangThai == true
-                       orderby p.MaSP descending
+                       orderby p.MaSP ascending
                        select p);
             return res;
         }
@@ -65,12 +65,18 @@ namespace MyWebsite.Models.DAO
                           NoiBat = p.NoiBat,
                           MoTa = p.MoTa,
                           TenDM = cat.TenDM
-
-                          
                       }
-
                       );
             return rs;
+        }
+        public IQueryable<SAN_PHAM> ListProductByCatID(int idCat)
+        {
+            var res = (from p in db.SAN_PHAM
+                       where p.TrangThai == true & p.MaDM == idCat
+                       orderby p.MaSP ascending
+                       select p
+                       );
+            return res;
         }
 
         public void UpdateProduct(SAN_PHAM spTmp)
@@ -103,6 +109,36 @@ namespace MyWebsite.Models.DAO
         public SAN_PHAM FindProductByID(int MaSP)
         {
             return db.SAN_PHAM.Find(MaSP);
+        }
+
+        public IQueryable<SAN_PHAM> ListNewArrivals()
+        {
+            var res = (from p in db.SAN_PHAM
+                       where p.TrangThai == true
+                       orderby p.MaSP descending
+                       select p
+                ).Take(10);
+            return res;
+        }
+        public IQueryable<SAN_PHAM> ListRandom()
+        {
+            var res = (from p in db.SAN_PHAM
+                       where p.TrangThai == true
+                       orderby Guid.NewGuid()// Random 
+                       select p
+                       ).Take(3);// lay 3 ban ghi
+
+            return res;
+        }
+        public IQueryable<SAN_PHAM> ListCheapest()
+        {
+            var res = (from p in db.SAN_PHAM
+                       where p.TrangThai == true
+                       orderby p.DonGia ascending
+                       select p
+
+                ).Take(3);
+            return res;
         }
     }
 }

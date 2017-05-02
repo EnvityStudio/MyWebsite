@@ -26,7 +26,7 @@ namespace MyWebsite.Areas.Admin.Controllers
             if(res == true && ModelState.IsValid)
             {
                 SessionHelper.setSessionUser(new UserSession() { userName = model.userName});
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "AdminHome");
             }
             else
             {

@@ -1,5 +1,5 @@
-﻿@using MyWebsite.Models
-@model Product
+﻿
+@model MyWebsite.Models.Entities.SAN_PHAM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -23,35 +23,39 @@
                                 <div class="col-sm-5">
                                     <div class="product-img-box">
                                         <p class="product-image">
-                                            <a href="~/Content/images/products/@Model.Image" class="cloud-zoom" id="ma-zoom1">
-                                                <img src="~/Content/images/products/@Model.Image" alt="Fusce aliquam" title="Fusce aliquam" />
+                                            <a href="@Model.HinhAnh" class="cloud-zoom" id="ma-zoom1">
+                                                <img src="@Model.HinhAnh" alt="@Model.TenSP" title="@Model.TenSP" height="400" />
                                             </a>
                                         </p>
                                         <div class="more-views thumbnail-container">
                                             <ul class="bxslider">
                                                 <li class="thumbnail-item">
-                                                    <a href="~/Content/images/products/@Model.Image" class="cloud-zoom-gallery" title="" name="images/products/1.jpg" rel="useZoom: 'ma-zoom1', smallImage: 'images/products/1.jpg'">
-                                                        <img src="~/Content/images/products/@Model.Image" height="95" width="80" />
+                                                    <a href="~/Content/images/products/Nhat/Matcha/Matcha_2.jpg" class="cloud-zoom-gallery" title="@Model.TenSP" name="~/Content/images/products/Nhat/Matcha/Matcha_2.jpg" rel="useZoom: 'ma-zoom1', smallImage: '/Content/images/products/Nhat/Matcha/Matcha_2.jpg'">
+                                                        <img src="~/Content/images/products/Nhat/Matcha/Matcha_2.jpg" height="95" width="80" />
                                                     </a>
                                                 </li>
                                                 <li class="thumbnail-item">
-                                                    <a href="~/Content/images/products/@Model.Image" class="cloud-zoom-gallery" title="" name="images/products/1.jpg" rel="useZoom: 'ma-zoom1', smallImage: 'images/products/1.jpg'">
-                                                        <img src="~/Content/images/products/@Model.Image" height="95" width="80" />
+                                                    <a href="@Model.HinhAnh" class="cloud-zoom-gallery" title="@Model.TenSP" name="@Model.HinhAnh" rel="useZoom: 'ma-zoom1', smallImage: '@Model.HinhAnh'">
+                                                        <img src="@Model.HinhAnh" height="95" width="80" />
                                                     </a>
                                                 </li>
                                                 <li class="thumbnail-item">
-                                                    <a href="~/Content/images/products/@Model.Image" class="cloud-zoom-gallery" title="" name="images/products/1.jpg" rel="useZoom: 'ma-zoom1', smallImage: 'images/products/1.jpg'">
-                                                        <img src="~/Content/images/products/@Model.Image" height="95" width="80" />
+                                                    <a href="@Model.HinhAnh" class="cloud-zoom-gallery" title="@Model.TenSP" name="@Model.HinhAnh" rel="useZoom: 'ma-zoom1', smallImage: '@Model.HinhAnh'">
+                                                        <img src="@Model.HinhAnh" height="95" width="80" />
                                                     </a>
                                                 </li>
-                                               
+                                                <li class="thumbnail-item">
+                                                    <a href="@Model.HinhAnh" class="cloud-zoom-gallery" title="@Model.TenSP" name="@Model.HinhAnh" rel="useZoom: 'ma-zoom1', smallImage: '@Model.HinhAnh'">
+                                                        <img src="@Model.HinhAnh" height="95" width="80" />
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="product-shop col-sm-7">
                                     <div class="product-name">
-                                        <h1>@Model.ProName</h1>
+                                        <h1>@Model.TenSP</h1>
                                     </div>
                                     <div class="ratings">
                                         <div class="rating-box">
@@ -63,7 +67,7 @@
                                         <div class="price-box">
                                             <p class="special-price">
                                                 <span class="price-label">Special Price</span>
-                                                <span id="product-price-1" class="price">@Model.Price</span>
+                                                <span id="product-price-1" class="price">@Model.DonGia</span>
                                             </p>
                                         </div>
                                     </div>
