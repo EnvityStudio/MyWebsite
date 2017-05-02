@@ -179,17 +179,35 @@
                         <div class="mega-container visible-lg visible-md">
                             <div class="navleft-container">
                                 <div class="mega-menu-title"><h3>Category</h3></div>
-                                <div class="mega-menu-category">
-                                    <ul class="nav">
-                                        @{
-                                            //  CategoryDAO cat = new CategoryDAO();
-                                            foreach (var item in cat.ListCategory())
-                                            {
-                                                <li class="nosub"><a href="/Products/List/@item.MaDM">@item.TenDM</a></li>
-                                            }
-                                        }
-                                    </ul>
-                                </div>
+                                @{ if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Home")
+                                    {
+                                        <div class="mega-menu-category">
+                                            <ul class="nav">
+                                                @{
+                                                    CategoryDAO daoCat = new CategoryDAO();
+                                                    foreach (var item in daoCat.ListCategory())
+                                                    {
+                                                        <li class="nosub"><a href="/Products/List/@item.MaDM">@item.TenDM</a></li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="mega-menu-category" style="display:none;">
+                                                            <ul class="nav">
+                                                                @{
+                                                                    CategoryDAO daoCat = new CategoryDAO();
+                                                                    foreach (var item in daoCat.ListCategory())
+                                                                    {
+                                                                        <li class="nosub"><a href="/Products/List/@item.MaDM">@item.TenDM</a></li>
+                                                                    }
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                                    }
+                                }
                             </div>
                         </div>
                     </div>
@@ -447,6 +465,12 @@
     <script src="~/Scripts/js/countdown.js"></script>
     <!-- Custom Js -->
     <script src="~/Scripts/js/custom.js"></script>
+    <!-- Jquery ui Js -->
+    <script src="~/Scripts/js/jquery-ui.min.js"></script>
+    <!-- BX Slider Js -->
+    <script src="~/Scripts/js/jquery.bxslider.min.js"></script>
+    <!-- Cloud Zoom Js -->
+    <script src="~/Scripts/js/cloud-zoom.js"></script>
 
     <script type="text/javascript">
         /* Main Slideshow */
