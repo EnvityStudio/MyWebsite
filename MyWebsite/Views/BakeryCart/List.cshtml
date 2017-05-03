@@ -38,7 +38,7 @@
                                 <tr>
                                     <td class="text-center"><a class="btn-remove" href="Delete/@item.ID"><span class="fa fa-trash-o"></span></a></td>
                                     <td>
-                                        <a class="product-image" title="Primis in faucibus" href="#">
+                                        <a class="product-image" title="@item.Name" href="/Products/Detail/@item.ID">
                                             <img alt="@item.Name" height="154" src="@item.Images">
                                         </a>
                                     </td>
@@ -72,40 +72,7 @@
                 </div>
                 <div class="line2"></div>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <h4>ESTIMATE SHIPPING AND TAX</h4>
-                        <p class="text-muted">Enter your destination to get shipping &amp; tax</p>
-                        <div class="form-group">
-                            <label class="control-label">Country <em>*</em></label>
-                            <select class="form-control">
-                                <option>-- Select options  --</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">State/Province <em>*</em></label>
-                            <select class="form-control">
-                                <option>-- Select options  --</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Zip/Postal Code</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default btn-md">GET A QUOTE</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <h4>DISCOUNT CODE</h4>
-                        <p class="text-muted">Enter your coupon code if you have one</p>
-                        <div class="form-group">
-                            <label class="control-label">&nbsp;</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default btn-md">APPLY COUPON</button>
-                        </div>
-                    </div>
+                
                     <div class="col-sm-4">
                         @{ 
                             double totalMoney = 0;
