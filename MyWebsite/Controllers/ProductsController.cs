@@ -25,6 +25,6 @@ namespace MyWebsite.Controllers
             ProductDAO dao = new ProductDAO();
             return View(dao.ListProductByCatID(id));
         }
-
+        
     }
 }

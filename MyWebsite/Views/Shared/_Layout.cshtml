@@ -1,4 +1,6 @@
 ﻿@using MyWebsite.Models.DAO;
+@using MyWebsite.Models.Bean;
+
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -137,37 +139,48 @@
                             </div>
                             <button type="submit" class="btn btn-danger"><span class="fa fa-search"></span></button>
                         </form>
+                        @{
+
+                            double totalMoney = 0;
+                            BakeryCart cart = (BakeryCart)Session["cart"];
+                            if (cart != null)
+                            {
+                                totalMoney = cart.getTotalCart();
+
+                            }
+                          
+                         }
+
                         <div class="mini-cart">
                             <div class="top-cart-title">
                                 <a href="cart.html" class="dropdown-toggle" data-toggle="dropdown">
                                     your cart
-                                    <span class="price">$45.00</span>
+                                    <span class="price">@totalMoney</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div class="cart-listing">
+                                    @if (cart!= null)
+                                    {
+                                        foreach (var item in cart.list)
+                                    {
                                         <div class="media">
-                                            <div class="media-left"><a href="#"><img src="~/Content/images/products/11.jpg" class="img-responsive" alt=""></a></div>
+                                            <div class="media-left"><a href="#"><img height="91" src="@item.Images" class="img-responsive" alt=""></a></div>
                                             <div class="media-body">
-                                                <button type="button" class="remove-cart-item">&times;</button>
+                                               
+                                                <a href="/BakeryCart/Delete/@item.ID" ><button type="button"class="remove-cart-item">&times;</button></a>
                                                 <h4>Accumsan elit</h4>
-                                                <div class="mini-cart-qty">Qty:2</div>
-                                                <div class="mini-cart-price">$ 64.00</div>
+                                                <div class="mini-cart-qty">Amout :@item.Amount</div>
+                                                <div class="mini-cart-price">@item.getTotal()</div>
                                             </div>
                                         </div>
-                                        <div class="media">
-                                            <div class="media-left"><a href="#"><img src="~/Content/images/products/13.jpg" class="img-responsive" alt=""></a></div>
-                                            <div class="media-body">
-                                                <button type="button" class="remove-cart-item">&times;</button>
-                                                <h4>Accumsan elit</h4>
-                                                <div class="mini-cart-qty">Qty:2</div>
-                                                <div class="mini-cart-price">$ 64.00</div>
-                                            </div>
-                                        </div>
+                                    }
+                                    }
+
                                     </div><!-- /.cart-listing -->
-                                    <div class="mini-cart-subtotal">Shipping: <span class="price">$5.00</span></div>
-                                    <div class="mini-cart-subtotal">Total: <span class="price">$200.00</span></div>
+                                    <div class="mini-cart-subtotal">Shipping: <span class="price">$0</span></div>
+                                    <div class="mini-cart-subtotal">Total: <span class="price">@totalMoney</span></div>
                                     <div class="checkout-btn">
-                                        <a href="#" class="btn btn-default btn-md fwb">CHECK OUT</a>
+                                        <a href="/BakeryCart/List" class="btn btn-default btn-md fwb">CHECK OUT</a>
                                     </div>
                                 </div>
                             </div>
@@ -211,15 +224,15 @@
                             </div>
                         </div>
                     </div>
-                    @*<div class="col-md-9">
+                   <div class="col-md-9">
                             <ul class="menu clearfix visible-lg visible-md">
                                 <li class="active"><a href="#">Shop</a></li>
-                                @foreach (var item2 in (IEnumerable<MyWebsite.Models.Category>)ViewBag.b)
-                                {
-                                    <li><a href="#">@item2.CatName</a></li>
-                                }
+                                 <li><a href="#">Tin Tức</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Liên Hệ</a></li>
+
                             </ul>
-                        </div>*@
+                        </div>
                 </div>
                 <nav class="navbar navbar-primary navbar-static-top hidden-lg hidden-md">
                     <div class="navbar-header">

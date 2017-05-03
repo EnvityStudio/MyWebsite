@@ -8,16 +8,19 @@ namespace MyWebsite.Models.Bean
     public class BakeryCart
     {
         public List<ItemCart> list = new List<ItemCart>();
-        public void AddItem(int ID, string Name, int Amount, double Price)
+        public void AddItem(int ID, string Name, int Amount, double Price,string Images)
         {
             bool check = false;
-            foreach (var i in list)
+            if (list != null)
             {
-                if(i.ID == ID)
+                foreach (var i in list)
                 {
-                    check = true;
-                    i.Amount += Amount;
-                    break;
+                    if (i.ID == ID)
+                    {
+                        check = true;
+                        i.Amount += Amount;
+                        break;
+                    }
                 }
             }
             if (!check)
@@ -27,7 +30,7 @@ namespace MyWebsite.Models.Bean
                 item.Name = Name;
                 item.Amount = Amount;
                 item.Price = Price;
-
+                item.Images = Images;
                 this.list.Add(item);
             }
         }

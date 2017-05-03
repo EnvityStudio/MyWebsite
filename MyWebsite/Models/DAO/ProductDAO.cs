@@ -140,5 +140,42 @@ namespace MyWebsite.Models.DAO
                 ).Take(3);
             return res;
         }
+        // lấy danh sách bánh liên quan 
+        public IQueryable<SAN_PHAM> ListRelated(int id)
+        {
+            var res = (from p in db.SAN_PHAM
+                       where p.TrangThai == true
+                       orderby p.DonGia ascending
+                       select p).Take(3);
+            return res;
+        }
+        public IQueryable<SAN_PHAM> ListUpsellProduct()
+        {
+            var res = (from p in db.SAN_PHAM
+                       where p.TrangThai == true
+                       orderby p.DonGia ascending
+                       select p
+
+                ).Take(3);
+            return res;
+        }
+        public IQueryable<SAN_PHAM> ListProductOrderByName(int id)
+        {
+            var res = (from p in db.SAN_PHAM
+                       where p.TrangThai == true & p.MaDM == id
+                       orderby p.TenSP descending
+                       select p
+                       );
+            return res;
+        }
+        public IQueryable<SAN_PHAM> ListProductOrderByPrice(int id)
+        {
+            var res = (from p in db.SAN_PHAM
+                       where p.TrangThai == true & p.MaDM == id
+                       orderby p.DonGia descending
+                       select p
+                         );
+            return res;
+        }
     }
 }
