@@ -11,13 +11,16 @@ namespace MyWebsite.Models.Bean
         public void AddItem(int ID, string Name, int Amount, double Price)
         {
             bool check = false;
-            foreach (var i in list)
+            if (list != null)
             {
-                if(i.ID == ID)
+                foreach (var i in list)
                 {
-                    check = true;
-                    i.Amount += Amount;
-                    break;
+                    if (i.ID == ID)
+                    {
+                        check = true;
+                        i.Amount += Amount;
+                        break;
+                    }
                 }
             }
             if (!check)
@@ -27,7 +30,6 @@ namespace MyWebsite.Models.Bean
                 item.Name = Name;
                 item.Amount = Amount;
                 item.Price = Price;
-
                 this.list.Add(item);
             }
         }

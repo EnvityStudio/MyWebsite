@@ -13,10 +13,12 @@ namespace MyWebsite.Controllers
         public ActionResult Index()
         {
             ProductDAO pro = new ProductDAO();
-            ViewBag.p = pro.ListProductFeatured();
+            ViewBag.listFeatured = pro.ListProductFeatured();
             ViewBag.listArrivals = pro.ListNewArrivals();
             ViewBag.listRandom = pro.ListRandom();
             ViewBag.listCheapest = pro.ListCheapest();
+            ViewBag.listUpsell = pro.ListUpsellProduct();
+            
             return View();
         }
         public ActionResult Footer()

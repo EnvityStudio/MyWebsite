@@ -26,12 +26,13 @@ namespace MyWebsite.Controllers
         public ActionResult List()
         {
             BakeryCart Cart = (BakeryCart)Session["cart"];
-            List<ItemCart> list = new List<ItemCart>();
+            List<ItemCart> ls = new List<ItemCart>();
             if(Cart != null)
             {
-                list = Cart.list;
+
+                ls = Cart.list;
             }
-            return View(list);
+            return View(ls);
         }
         public ActionResult UpdateAmount()
         {
