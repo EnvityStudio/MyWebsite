@@ -1,4 +1,4 @@
-namespace MyWebsite.Models.Entities
+﻿namespace MyWebsite.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -19,26 +19,29 @@ namespace MyWebsite.Models.Entities
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Tên sản phẩm")]
         public string TenSP { get; set; }
-
+        [Display(Name = "Đơn giá")]
         public int DonGia { get; set; }
-
+        [Display(Name = "Trạng thái")]
         public bool? TrangThai { get; set; }
-
+        [Display(Name = "Nổi bật")]
         public bool? NoiBat { get; set; }
 
-        [Required]
         [StringLength(255)]
+        [Display(Name = "Hình ảnh")]
         public string HinhAnh { get; set; }
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Mô tả")]
         public string MoTa { get; set; }
 
         [Column(TypeName = "text")]
         [Required]
+        [Display(Name = "Chi tiết")]
         public string ChiTiet { get; set; }
-
+        [Display(Name = "Mã danh mục")]
         public int MaDM { get; set; }
 
         public virtual DANH_MUC DANH_MUC { get; set; }

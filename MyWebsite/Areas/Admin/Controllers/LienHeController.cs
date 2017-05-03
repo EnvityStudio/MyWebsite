@@ -10,7 +10,7 @@ using MyWebsite.Models.Entities;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    public class LienHeController : Controller
+    public class LienHeController : BaseController
     {
         private MyDbContext db = new MyDbContext();
 

@@ -5,14 +5,14 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>CHỈNH SỬA</h2>
 
 @using (Html.BeginForm(Html.BeginForm("Edit", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" })))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>SAN_PHAM</h4>
+        <h4>SẢN PHẨM</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MaSP)
@@ -56,10 +56,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @using (Html.BeginForm("FileUpload", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @*@using (Html.BeginForm("Create", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                    <input type="file" name="file" id="file" value="Chọn file" />
-                }
+                    <input type="file" name="file" id="file" value="Browser" onchange="imagepreview(this);" />
+                    <img src="@Url.Content(@Model.HinhAnh)" id="imgpreview" height="30" width="30" alt="Image Preview" />
+                }*@
+                <input type="file" name="file" />
+                @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -89,7 +92,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Lưu" class="btn btn-default" />
             </div>
         </div>
     </div>

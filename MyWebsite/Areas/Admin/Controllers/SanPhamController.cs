@@ -11,7 +11,7 @@ using System.IO;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    public class SanPhamController : Controller
+    public class SanPhamController : BaseController
     {
         private MyDbContext db = new MyDbContext();
 
@@ -51,49 +51,28 @@ namespace MyWebsite.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaSP,TenSP,DonGia,TrangThai,NoiBat,HinhAnh,MoTa,ChiTiet,MaDM")] SAN_PHAM sAN_PHAM,HttpPostedFileBase file)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.SAN_PHAM.Add(sAN_PHAM);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //ViewBag.MaDM = new SelectList(db.DANH_MUC, "MaDM", "TenDM", sAN_PHAM.MaDM);
-            //return View(sAN_PHAM);
-
-            var path = "";
-            if (file != null)
+            if (ModelState.IsValid)
             {
-                if (file.ContentLength > 0)
+                if (file != null && file.ContentLength > 0)
                 {
                     if (Path.GetExtension(file.FileName).ToLower() == ".jpg"
                         || Path.GetExtension(file.FileName).ToLower() == ".jpeg"
-                        || Path.GetExtension(file.FileName).ToLower() == ".png"
-                        || Path.GetExtension(file.FileName).ToLower() == ".gif")
+                        || Path.GetExtension(file.FileName).ToLower() == ".gif"
+                        || Path.GetExtension(file.FileName).ToLower() == ".png")
                     {
-                        path = Path.Combine(Server.MapPath("~/Content/images/products"), file.FileName);
+                        string NameFile = Path.GetFileName(file.FileName);
+                        string path = Path.Combine(Server.MapPath("~/Content/images/products"), NameFile);
                         file.SaveAs(path);
-                        sAN_PHAM.HinhAnh = "~/Content/images/products/" + file.FileName;
+                        sAN_PHAM.HinhAnh = "/Content/images/products/" + file.FileName;
                     }
-                }
-            }
-            try
-            {
-                if (ModelState.IsValid)
-                {
+
                     db.SAN_PHAM.Add(sAN_PHAM);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    return View(sAN_PHAM);
-                }
             }
-            catch
-            {
-                return View(sAN_PHAM);
-            }
+            ViewBag.MaDM = new SelectList(db.DANH_MUC, "MaDM", "TenDM", sAN_PHAM.MaDM);
+            return View(sAN_PHAM);
         }
 
         // GET: Admin/SanPham/Edit/5
@@ -117,13 +96,27 @@ namespace MyWebsite.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaSP,TenSP,DonGia,TrangThai,NoiBat,HinhAnh,MoTa,ChiTiet,MaDM")] SAN_PHAM sAN_PHAM)
+        public ActionResult Edit([Bind(Include = "MaSP,TenSP,DonGia,TrangThai,NoiBat,HinhAnh,MoTa,ChiTiet,MaDM")] SAN_PHAM sAN_PHAM, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sAN_PHAM).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (Path.GetExtension(file.FileName).ToLower() == ".jpg"
+                        || Path.GetExtension(file.FileName).ToLower() == ".jpeg"
+                        || Path.GetExtension(file.FileName).ToLower() == ".gif"
+                        || Path.GetExtension(file.FileName).ToLower() == ".png")
+                    {
+                        string NameFile = Path.GetFileName(file.FileName);
+                        string path = Path.Combine(Server.MapPath("~/Content/images/products"), NameFile);
+                        file.SaveAs(path);
+                        sAN_PHAM.HinhAnh = "/Content/images/products/" + file.FileName;
+                    }
+
+                    db.Entry(sAN_PHAM).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.MaDM = new SelectList(db.DANH_MUC, "MaDM", "TenDM", sAN_PHAM.MaDM);
             return View(sAN_PHAM);

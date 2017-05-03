@@ -20,6 +20,10 @@ namespace MyWebsite.Models.DAO
             var rs = (from item in db.ADMINs select item);
             return rs;
         }
+        public ADMIN getByName(string tenDN)
+        {
+            return db.ADMINs.SingleOrDefault(x => x.TenDN == tenDN);
+        }
         public bool Login(string userName, string passWord)
         {
             Object[] sqlPara =

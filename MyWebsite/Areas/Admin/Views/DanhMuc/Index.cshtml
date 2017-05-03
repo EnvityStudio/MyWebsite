@@ -5,17 +5,17 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2>DANH SÁCH DANH MỤC</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Tạo mới danh mục", "Create","", new { @style = "color:blue;" })
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th> 
             @Html.DisplayNameFor(model => model.TenDM)
             </th>
-        <th>
+        <th> 
             @Html.DisplayNameFor(model => model.ThuTu)
         </th>
         <th>

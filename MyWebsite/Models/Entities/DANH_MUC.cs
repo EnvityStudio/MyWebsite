@@ -19,13 +19,13 @@
 
         [Required]
         [StringLength(255)]
-        [Display(Name = "Tên Danh Mục")]
+        [Display(Name = "Tên danh mục")]
         public string TenDM { get; set; }
-
+        
         public int? DmCha { get; set; }
-
+        [Display(Name = "Thứ tự")]
         public int ThuTu { get; set; }
-
+        [Display(Name = "Trạng thái")]
         public bool TrangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

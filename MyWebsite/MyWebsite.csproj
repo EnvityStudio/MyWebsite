@@ -189,12 +189,14 @@
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamController.cs" />
     <Compile Include="Areas\Admin\Models\LoginDTO.cs" />
+    <Compile Include="Areas\Admin\Session\CommonConstant.cs" />
     <Compile Include="Areas\Admin\Session\SessionHelper.cs" />
     <Compile Include="Areas\Admin\Session\UserSession.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BakeryCartController.cs" />
     <Compile Include="Controllers\Danh_MucController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\San_PhamController.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -763,6 +765,7 @@
     <Content Include="Content\images\next.png" />
     <Content Include="Content\images\payment.png" />
     <Content Include="Content\images\prev.png" />
+    <Content Include="Content\images\products\15059983235_f95c4bc78b_b.jpg" />
     <Content Include="Content\images\products\Duc\Baumkuchen\Baumkuchen_1.jpg" />
     <Content Include="Content\images\products\Duc\Baumkuchen\Baumkuchen_2.jpg" />
     <Content Include="Content\images\products\Duc\Baumkuchen\Baumkuchen_3.jpg" />
