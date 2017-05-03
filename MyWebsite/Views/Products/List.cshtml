@@ -80,7 +80,7 @@
                 </div><!-- /.col-left -->
                 <div class="col-sm-9 col-right">
                     <div class="banner">
-                        <a href="#"><img alt="" src="images/ads/ads-05.jpg"></a>
+                        <a href="#"><img alt="banner" src="/Content/images/ads/ads-05.jpg"></a>
                     </div>
                     <div class="page-title">
                         <h1>CATEGORY LIST</h1>
@@ -151,16 +151,19 @@
                                                         </p>
                                                     </div>
                                                     <div class="desc std">
-                                                        @item.ChiTiet <a class="link-learn" title="Fusce aliquam" href="#">Learn More</a>
+                                                        @item.ChiTiet <a class="link-learn" title="Fusce aliquam" href="/Products/Detail/@item.MaSP">Learn More</a>
                                                     </div>
                                                     <div class="actions">
                                                         <div class="actions-inner">
-                                                            @*<input type="button" value="add to cart"  onclick="location.href='@Html.ActionLink("", "Add", "BakeryCart",new { ID= @item.MaSP }, null)'"/>*@
-                                                      
                                                             <ul class="add-to-links">
-                                                                <li><a title="Wishlist" class="link-wishlist" href="#"><em class="tooltip">Wishlist</em>Add to Wishlist</a></li>
+                                                              <li>@Html.ActionLink("Add to Cart", "Add", "BakeryCart", new { ID = @item.MaSP }, null)</li>
                                                             </ul>
-                                                        </div>
+                                                                @*<input type="button" value="add to cart"  onclick="location.href='@Html.ActionLink("", "Add", "BakeryCart",new { ID= @item.MaSP }, null)'"/>*@
+
+                                                                <ul class="add-to-links">
+                                                                    <li><a title="Wishlist" class="link-wishlist" href="#"><em class="tooltip">Wishlist</em>Add to Wishlist</a></li>
+                                                                </ul>
+</div>
                                                     </div>
                                                 </div>
                                             </div>

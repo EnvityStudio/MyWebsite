@@ -8,7 +8,7 @@ namespace MyWebsite.Models.Bean
     public class BakeryCart
     {
         public List<ItemCart> list = new List<ItemCart>();
-        public void AddItem(int ID, string Name, int Amount, double Price)
+        public void AddItem(int ID, string Name, int Amount, double Price,string Images)
         {
             bool check = false;
             if (list != null)
@@ -30,6 +30,7 @@ namespace MyWebsite.Models.Bean
                 item.Name = Name;
                 item.Amount = Amount;
                 item.Price = Price;
+                item.Images = Images;
                 this.list.Add(item);
             }
         }

@@ -111,7 +111,10 @@
                                                 </div><!-- /input-group -->
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-danger btn-cart">Add to cart</button>
+                                        @*<button type="submit" class="btn btn-danger btn-cart">Add to cart</button>*@
+                                        <ul class="add-to-links">
+                                            <li>@Html.ActionLink("Add to Cart", "Add", "BakeryCart", new { ID = @Model.MaSP }, null)</li>
+                                        </ul>
                                         <button type="button" class="btn btn-default btn-wishlist">Add to wishlist</button>
                                         <button type="button" class="btn btn-default btn-compare">Add to compare</button>
                                     </form>

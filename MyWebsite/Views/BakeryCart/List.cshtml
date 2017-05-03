@@ -39,7 +39,7 @@
                                     <td class="text-center"><a class="btn-remove" href="Delete/@item.ID"><span class="fa fa-trash-o"></span></a></td>
                                     <td>
                                         <a class="product-image" title="Primis in faucibus" href="#">
-                                            <img alt="@item.Name" src="@item.Images">
+                                            <img alt="@item.Name" height="154" src="@item.Images">
                                         </a>
                                     </td>
                                     <td>
@@ -49,20 +49,16 @@
                                             Color: Red
                                         </div>
                                     </td>
-                                    <td class="text-center"><a href="#">Edit</a></td>
+                                    <td class="text-center"><a href="">Edit</a></td>
                                     <td class="qty">
                                         <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <button class="btn" type="button">-</button>
-                                            </span>
-                                            <input type="text" class="form-control" value="3">
-                                            <span class="input-group-btn">
-                                                <button class="btn" type="button">+</button>
-                                            </span>
+                                            
+                                            <input type="text" class="form-control" value="@item.Amount">
+                                           
                                         </div><!-- /input-group -->
                                     </td>
                                     <td class="subtotal">@item.Price</td>
-                                    <td class="grandtotal">@item.Price</td>
+                                    <td class="grandtotal">@item.getTotal()</td>
                                 </tr>
                             }
 
