@@ -11,14 +11,16 @@ namespace MyWebsite.Controllers
 {
     public class BakeryCartController : Controller
     {
+       
         public ActionResult Add(int id)
         {
+
             BakeryCart Cart = (BakeryCart)Session["cart"];
             if (Cart == null)
                 Cart = new BakeryCart();
             ProductDAO dao = new ProductDAO();
             SAN_PHAM sp = dao.FindProductByID(id);
-            Cart.AddItem(sp.MaDM, sp.TenSP, 1, sp.DonGia);
+            Cart.AddItem(sp.MaSP, sp.TenSP, 1, sp.DonGia,sp.HinhAnh);
 
             Session["cart"] = Cart;
             return Redirect(Request.UrlReferrer.ToString());
@@ -34,9 +36,14 @@ namespace MyWebsite.Controllers
             }
             return View(ls);
         }
-        public ActionResult UpdateAmount()
+        public ActionResult UpdateAmount(int id,int quanity)
         {
-            return View();
+            BakeryCart cart=(BakeryCart)Session["cart"];
+            if (cart != null)
+            {
+                cart.addAmount(id, quanity);
+            }
+            return Redirect(Request.UrlReferrer.ToString());
         }
         public ActionResult Delete(int ID)
         {
