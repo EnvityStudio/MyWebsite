@@ -1,49 +1,48 @@
-﻿@model IQueryable<MyWebsite.Entities.DANH_MUC>
+﻿@model IEnumerable<MyWebsite.Models.Entities.DANH_MUC>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<div class="row">
-    <div class="col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <div class="title">Danh sách danh mục</div>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Mã danh mục</th>
-                            <th>Tên danh mục</th>
-                            <th>Mã DM cha</th>
-                            <th>Thứ tự</th>
-                            <th>Trạng thái</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <th scope="row">@item.MaDM</th>
-                                <td>@item.TenDM</td>
-                                <td>@item.DmCha</td>
-                                <td>@item.ThuTu</td>
-                                <td>@item.TrangThai</td>
-                                <td>
-                                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaDM }) |
-                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDM}) |
-                                    @Html.ActionLink("Xoá", "Delete", new { id = item.MaDM })
-                                </td>
-                            </tr>
-                        }
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenDM)
+            </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThuTu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </th>
+        <th>
+            Thao tác
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenDM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThuTu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaDM }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaDM }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaDM })
+        </td>
+    </tr>
+}
+
+</table>

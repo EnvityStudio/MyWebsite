@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MyWebsite.Models.Entities.SAN_PHAM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiBat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DANH_MUC.TenDM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhAnh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChiTiet)
+        </th>
+        <th>Thao tác</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGia)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.TrangThai)*@
+
+                @if (item.TrangThai == true)
+                {   <img src="/Areas/Admin/Content/img/icon/icon_tt.png" />}
+                else
+                {
+                    <img src="/Areas/Admin/Content/img/icon/icon_k_tt.png" />  }
+
+            </td>
+            <td>
+                @if (item.TrangThai == true)
+                { <p>Có</p>}
+                else
+                {
+                    <p>Không</p>}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DANH_MUC.TenDM)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.HinhAnh)*@
+                <img src="@item.HinhAnh" height="60" width="60">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChiTiet)
+            </td>
+            <td>
+                @*<a href="/Admin/SanPham/Edit/@item.MaSP"><img src="/Areas/Admin/Content/img/icon/icon_sua.png" /></a>*@
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaSP })
+                |
+                @Html.ActionLink("Details", "Details", new { id = item.MaSP }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaSP })
+            </td>
+        </tr>
+    }
+
+</table>

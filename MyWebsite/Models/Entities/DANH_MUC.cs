@@ -1,4 +1,4 @@
-namespace MyWebsite.Models.Entities
+﻿namespace MyWebsite.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace MyWebsite.Models.Entities
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Tên Danh Mục")]
         public string TenDM { get; set; }
 
         public int? DmCha { get; set; }
