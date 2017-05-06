@@ -7,10 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MyWebsite.Models.Entities;
+using System.IO;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    public class BlogController : Controller
+    public class BlogController : BaseController
     {
         private MyDbContext db = new MyDbContext();
 
@@ -46,15 +47,29 @@ namespace MyWebsite.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaBlog,TieuDe,HinhAnh,NoiDung,NoiBat,NgayDang")] BLOG bLOG)
+        public ActionResult Create([Bind(Include = "MaBlog,TieuDe,HinhAnh,NoiDung,NoiBat,NgayDang")] BLOG bLOG, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.BLOGs.Add(bLOG);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (Path.GetExtension(file.FileName).ToLower() == ".jpg"
+                        || Path.GetExtension(file.FileName).ToLower() == ".jpeg"
+                        || Path.GetExtension(file.FileName).ToLower() == ".gif"
+                        || Path.GetExtension(file.FileName).ToLower() == ".png")
+                    {
+                        string NameFile = Path.GetFileName(file.FileName);
+                        string path = Path.Combine(Server.MapPath("~/Content/images/blog"), NameFile);
+                        file.SaveAs(path);
+                        bLOG.HinhAnh = "/Content/images/blog/" + file.FileName;
+                    }
 
+                    db.BLOGs.Add(bLOG);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+           
             return View(bLOG);
         }
 

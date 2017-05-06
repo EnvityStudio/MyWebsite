@@ -35,7 +35,12 @@
             @Html.DisplayFor(modelItem => item.ThuTu)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TrangThai)
+            @*@Html.DisplayFor(modelItem => item.TrangThai)*@
+            @if (item.TrangThai == true)
+                {   <img src="/Areas/Admin/Content/img/icon/icon_tt.png" />}
+                else
+                {
+                <img src="/Areas/Admin/Content/img/icon/icon_k_tt.png" />  }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MaDM }) |
