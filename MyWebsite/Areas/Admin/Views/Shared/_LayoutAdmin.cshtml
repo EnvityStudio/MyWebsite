@@ -1,6 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using MyWebsite.Areas.Admin.Session
+<!DOCTYPE html>
 <html>
 <head>
+
+    <script type="text/javascript">
+        function imagepreview(input) {
+            if (input.files && input.files[0]) {
+                var filerd = new FileReader();
+                filerd.onload = function (e) {
+                    $("#imgpreview").attr('src', e.target.result);
+                };
+                filerd.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
     <title>Web Bakery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
@@ -39,63 +53,33 @@
                         <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                             <i class="fa fa-times icon"></i>
                         </button>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-comments-o"></i></a>
-                            <ul class="dropdown-menu animated fadeInDown">
-                                <li class="title">
-                                    Notification <span class="badge pull-right">0</span>
-                                </li>
-                                <li class="message">
-                                    No new notification
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown danger">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
-                            <ul class="dropdown-menu danger  animated fadeInDown">
-                                <li class="title">
-                                    Notification <span class="badge pull-right">4</span>
-                                </li>
-                                <li>
-                                    <ul class="list-group notifications">
-                                        <a href="#">
-                                            <li class="list-group-item">
-                                                <span class="badge">1</span> <i class="fa fa-exclamation-circle icon"></i> new registration
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li class="list-group-item">
-                                                <span class="badge success">1</span> <i class="fa fa-check icon"></i> new orders
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li class="list-group-item">
-                                                <span class="badge danger">2</span> <i class="fa fa-comments icon"></i> customers messages
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li class="list-group-item message">
-                                                view all
-                                            </li>
-                                        </a>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="dropdown profile">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily Hart <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @{  var session = (UserSession)Session[CommonConstant.ADMIN_SESSION];
+                                if (session != null)
+                                {
+                                    <p class="username">Xin chào @session.userName</p>
+                                }
+                            }<span class="caret"></span></a>
                             <ul class="dropdown-menu animated fadeInDown">
                                 <li class="profile-img">
-                                    <img src="../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
+                                    <img src="~/Content/images/products/Duc/Prinzregententorte/Prinzregententorte _1.jpg" class="profile-img">
                                 </li>
                                 <li>
                                     <div class="profile-info">
-                                        <h4 class="username">Emily Hart</h4>
-                                        <p>emily_hart@email.com</p>
-                                        <div class="btn-group margin-bottom-2x" role="group">
+                                        @{  
+                                            if (session != null)
+                                            {
+                                                <h4 class="username">@session.userName</h4>
+                                            }
+                                        }
+                                        
+                                        @*<p>emily_hart@email.com</p>*@
+                                        @*<div class="btn-group margin-bottom-2x" role="group">
                                             <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button>
                                             <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Logout</button>
-                                        </div>
+                                        </div>*@
+                                        <a href="/Admin/Logout"><i class="fa fa-sign-out"></i>Logout</></a>
                                     </div>
                                 </li>
                             </ul>
@@ -136,17 +120,20 @@
                                 </div>
                             </li>
 
-
+                            <!-- Dropdown-->
                             <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#dropdown-element">
-                                    <span class="icon fa fa-desktop"></span><span class="title">UI Kits</span>
+                                <a data-toggle="collapse" href="#component-example">
+                                    <span class="icon fa fa-cubes"></span><span class="title">Sản phẩm</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
-                                <div id="dropdown-element" class="panel-collapse collapse">
+                                <div id="component-example" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <li>
-                                                <a href="ui-kits/theming.html">Theming</a>
+                                                <a href="/Admin/SanPham/Create">Thêm sản phẩm</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Admin/SanPham/Index">Danh sách sản phẩm</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -156,85 +143,58 @@
 
                             <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#dropdown-table">
-                                    <span class="icon fa fa-table"></span><span class="title">Table</span>
+                                    <span class="icon fa fa-table"></span><span class="title">Khách hàng</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
                                 <div id="dropdown-table" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <li>
-                                                <a href="table/table.html">Table</a>
-                                            </li>
-                                            <li>
-                                                <a href="table/datatable.html">Datatable</a>
+                                                <a href="/Admin/KhachHang/Index">Danh sách khách hàng</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-    
-                            <!-- Dropdown-->
+
                             <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#component-example">
-                                    <span class="icon fa fa-cubes"></span><span class="title">Components</span>
+                                <a data-toggle="collapse" href="#dropdown-element">
+                                    <span class="icon fa fa-desktop"></span><span class="title">Blog</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
-                                <div id="component-example" class="panel-collapse collapse">
+                                <div id="dropdown-element" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <li>
-                                                <a href="components/pricing-table.html">Pricing Table</a>
+                                                <a href="/Admin/Blog/Create">Thêm blog</a>
                                             </li>
                                             <li>
-                                                <a href="components/chartjs.html">Chart.JS</a>
+                                                <a href="/Admin/Blog/Index">Danh sách blog</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
+
                             <!-- Dropdown-->
-                            <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#dropdown-example">
-                                    <span class="icon fa fa-slack"></span><span class="title">Page Example</span>
-                                </a>
-                                <!-- Dropdown level 1 -->
-                                <div id="dropdown-example" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul class="nav navbar-nav">
-                                            <li>
-                                                <a href="pages/login.html">Login</a>
-                                            </li>
-                                            <li>
-                                                <a href="pages/index.html">Landing Page</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
+                            
                             <!-- Dropdown-->
                             <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#dropdown-icon">
-                                    <span class="icon fa fa-archive"></span><span class="title">Icons</span>
+                                    <span class="icon fa fa-archive"></span><span class="title">Liên Hệ</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
                                 <div id="dropdown-icon" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <li>
-                                                <a href="icons/glyphicons.html">Glyphicons</a>
-                                            </li>
-                                            <li>
-                                                <a href="icons/font-awesome.html">Font Awesomes</a>
+                                                <a href="/Admin/LienHe/Index">Thông tin liên hệ</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <a href="license.html">
-                                    <span class="icon fa fa-thumbs-o-up"></span><span class="title">License</span>
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

@@ -22,15 +22,21 @@ namespace MyWebsite.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(LoginDTO model)
         {
-            var res = new AdminDAO().Login(model.userName, model.passWord);
-            if(res == true && ModelState.IsValid)
+            var dao = new AdminDAO();
+            var res = dao.Login(model.userName, model.passWord);
+            if (res == true && ModelState.IsValid)
             {
-                SessionHelper.setSessionUser(new UserSession() { userName = model.userName});
-                return RedirectToAction("Index", "AdminHome");
+                var user = dao.getByName(model.userName);
+                var userSession = new UserSession();
+
+                userSession.userName = user.TenDN;
+                userSession.userID = userSession.userID;
+                Session.Add(CommonConstant.ADMIN_SESSION, userSession);
+                return RedirectToAction("Index", "HomeAdmin");
             }
             else
             {
-                ModelState.AddModelError("","Tên đăng nhập hoặc mật khẩu không chính xác");
+                ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không chính xác");
             }
             return View(model);
         }

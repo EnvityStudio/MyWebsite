@@ -12,5 +12,5 @@ namespace MyWebsite.Areas.Admin.Models
         public bool rememberMe { get; set; }
 
 
-    }
+    } 
 }

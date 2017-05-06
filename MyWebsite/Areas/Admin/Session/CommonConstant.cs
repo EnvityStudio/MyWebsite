@@ -5,10 +5,8 @@ using System.Web;
 
 namespace MyWebsite.Areas.Admin.Session
 {
-    [Serializable]
-    public class UserSession
+    public class CommonConstant
     {
-        public int userID { get; set; }
-        public string userName { get; set; }
+        public static string ADMIN_SESSION = "ADMIN_SESSION";
     }
 }
