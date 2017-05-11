@@ -43,6 +43,7 @@ namespace MyWebsite.Models.Bean
                 break;
             }
         }
+      
 
         public void Delete(int ID)
         {
