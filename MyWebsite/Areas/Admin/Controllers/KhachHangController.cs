@@ -10,107 +10,107 @@ using MyWebsite.Models.Entities;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    public class DanhMucController : Controller
+    public class KhachHangController : Controller
     {
         private MyDbContext db = new MyDbContext();
 
-        // GET: Admin/DanhMuc
+        // GET: Admin/KhachHang
         public ActionResult Index()
         {
-            return View(db.DANH_MUC.ToList());
+            return View(db.KHACH_HANG.ToList());
         }
 
-        // GET: Admin/DanhMuc/Details/5
+        // GET: Admin/KhachHang/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DANH_MUC dANH_MUC = db.DANH_MUC.Find(id);
-            if (dANH_MUC == null)
+            KHACH_HANG kHACH_HANG = db.KHACH_HANG.Find(id);
+            if (kHACH_HANG == null)
             {
                 return HttpNotFound();
             }
-            return View(dANH_MUC);
+            return View(kHACH_HANG);
         }
 
-        // GET: Admin/DanhMuc/Create
+        // GET: Admin/KhachHang/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/DanhMuc/Create
+        // POST: Admin/KhachHang/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaDM,TenDM,DmCha,ThuTu,TrangThai")] DANH_MUC dANH_MUC)
+        public ActionResult Create([Bind(Include = "MaKH,TenKH,DiaChi,SDT,TrangThai")] KHACH_HANG kHACH_HANG)
         {
             if (ModelState.IsValid)
             {
-                db.DANH_MUC.Add(dANH_MUC);
+                db.KHACH_HANG.Add(kHACH_HANG);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(dANH_MUC);
+            return View(kHACH_HANG);
         }
 
-        // GET: Admin/DanhMuc/Edit/5
+        // GET: Admin/KhachHang/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DANH_MUC dANH_MUC = db.DANH_MUC.Find(id);
-            if (dANH_MUC == null)
+            KHACH_HANG kHACH_HANG = db.KHACH_HANG.Find(id);
+            if (kHACH_HANG == null)
             {
                 return HttpNotFound();
             }
-            return View(dANH_MUC);
+            return View(kHACH_HANG);
         }
 
-        // POST: Admin/DanhMuc/Edit/5
+        // POST: Admin/KhachHang/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaDM,TenDM,DmCha,ThuTu,TrangThai")] DANH_MUC dANH_MUC)
+        public ActionResult Edit([Bind(Include = "MaKH,TenKH,DiaChi,SDT,TrangThai")] KHACH_HANG kHACH_HANG)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dANH_MUC).State = EntityState.Modified;
+                db.Entry(kHACH_HANG).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(dANH_MUC);
+            return View(kHACH_HANG);
         }
 
-        // GET: Admin/DanhMuc/Delete/5
+        // GET: Admin/KhachHang/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DANH_MUC dANH_MUC = db.DANH_MUC.Find(id);
-            if (dANH_MUC == null)
+            KHACH_HANG kHACH_HANG = db.KHACH_HANG.Find(id);
+            if (kHACH_HANG == null)
             {
                 return HttpNotFound();
             }
-            return View(dANH_MUC);
+            return View(kHACH_HANG);
         }
 
-        // POST: Admin/DanhMuc/Delete/5
+        // POST: Admin/KhachHang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DANH_MUC dANH_MUC = db.DANH_MUC.Find(id);
-            db.DANH_MUC.Remove(dANH_MUC);
+            KHACH_HANG kHACH_HANG = db.KHACH_HANG.Find(id);
+            db.KHACH_HANG.Remove(kHACH_HANG);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

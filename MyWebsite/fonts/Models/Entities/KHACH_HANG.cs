@@ -1,4 +1,4 @@
-namespace MyWebsite.Models.Entities
+﻿namespace MyWebsite.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -19,16 +19,20 @@ namespace MyWebsite.Models.Entities
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Tên khách hàng")]
         public string TenKH { get; set; }
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Địa chỉ")]
         public string DiaChi { get; set; }
 
         [Required]
         [StringLength(11)]
+        [Display(Name = "Số điện thoại")]
         public string SDT { get; set; }
 
+        [Display(Name = "Trạng thái")]
         public bool? TrangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

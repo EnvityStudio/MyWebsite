@@ -10,107 +10,107 @@ using MyWebsite.Models.Entities;
 
 namespace MyWebsite.Areas.Admin.Controllers
 {
-    public class DanhMucController : Controller
+    public class LienHeController : BaseController
     {
         private MyDbContext db = new MyDbContext();
 
-        // GET: Admin/DanhMuc
+        // GET: Admin/LienHe
         public ActionResult Index()
         {
-            return View(db.DANH_MUC.ToList());
+            return View(db.LIEN_HE.ToList());
         }
 
-        // GET: Admin/DanhMuc/Details/5
+        // GET: Admin/LienHe/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DANH_MUC dANH_MUC = db.DANH_MUC.Find(id);
-            if (dANH_MUC == null)
+            LIEN_HE lIEN_HE = db.LIEN_HE.Find(id);
+            if (lIEN_HE == null)
             {
                 return HttpNotFound();
             }
-            return View(dANH_MUC);
+            return View(lIEN_HE);
         }
 
-        // GET: Admin/DanhMuc/Create
+        // GET: Admin/LienHe/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/DanhMuc/Create
+        // POST: Admin/LienHe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaDM,TenDM,DmCha,ThuTu,TrangThai")] DANH_MUC dANH_MUC)
+        public ActionResult Create([Bind(Include = "MaLH,TieuDe,NoiDung,TenKH,SDT,TrangThai,NgayDang")] LIEN_HE lIEN_HE)
         {
             if (ModelState.IsValid)
             {
-                db.DANH_MUC.Add(dANH_MUC);
+                db.LIEN_HE.Add(lIEN_HE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(dANH_MUC);
+            return View(lIEN_HE);
         }
 
-        // GET: Admin/DanhMuc/Edit/5
+        // GET: Admin/LienHe/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DANH_MUC dANH_MUC = db.DANH_MUC.Find(id);
-            if (dANH_MUC == null)
+            LIEN_HE lIEN_HE = db.LIEN_HE.Find(id);
+            if (lIEN_HE == null)
             {
                 return HttpNotFound();
             }
-            return View(dANH_MUC);
+            return View(lIEN_HE);
         }
 
-        // POST: Admin/DanhMuc/Edit/5
+        // POST: Admin/LienHe/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaDM,TenDM,DmCha,ThuTu,TrangThai")] DANH_MUC dANH_MUC)
+        public ActionResult Edit([Bind(Include = "MaLH,TieuDe,NoiDung,TenKH,SDT,TrangThai,NgayDang")] LIEN_HE lIEN_HE)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dANH_MUC).State = EntityState.Modified;
+                db.Entry(lIEN_HE).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(dANH_MUC);
+            return View(lIEN_HE);
         }
 
-        // GET: Admin/DanhMuc/Delete/5
+        // GET: Admin/LienHe/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DANH_MUC dANH_MUC = db.DANH_MUC.Find(id);
-            if (dANH_MUC == null)
+            LIEN_HE lIEN_HE = db.LIEN_HE.Find(id);
+            if (lIEN_HE == null)
             {
                 return HttpNotFound();
             }
-            return View(dANH_MUC);
+            return View(lIEN_HE);
         }
 
-        // POST: Admin/DanhMuc/Delete/5
+        // POST: Admin/LienHe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DANH_MUC dANH_MUC = db.DANH_MUC.Find(id);
-            db.DANH_MUC.Remove(dANH_MUC);
+            LIEN_HE lIEN_HE = db.LIEN_HE.Find(id);
+            db.LIEN_HE.Remove(lIEN_HE);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

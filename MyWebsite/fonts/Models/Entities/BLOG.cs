@@ -1,4 +1,4 @@
-namespace MyWebsite.Models.Entities
+﻿namespace MyWebsite.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -14,19 +14,23 @@ namespace MyWebsite.Models.Entities
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Tiêu đề")]
         public string TieuDe { get; set; }
 
-        [Required]
         [StringLength(255)]
+        [Display(Name = "Hình ảnh")]
         public string HinhAnh { get; set; }
 
         [Column(TypeName = "text")]
         [Required]
+        [Display(Name = "Nội dung")]
         public string NoiDung { get; set; }
 
+        [Display(Name = "Nổi bật")]
         public bool NoiBat { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Ngày đăng")]
         public DateTime NgayDang { get; set; }
     }
 }
