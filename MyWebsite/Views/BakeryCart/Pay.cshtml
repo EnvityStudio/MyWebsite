@@ -1,0 +1,56 @@
+﻿@model MyWebsite.Models.Entities.KHACH_HANG
+@{
+    ViewBag.Title = "Pay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pay</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="col-sm-6">
+    <div class="form-group">
+         
+        @Html.LabelFor(model => model.TenKH, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @style = "width:300px", @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "" })
+
+
+    </div>
+    <div class="form-group">
+        
+        @Html.LabelFor(model=>model.SDT,htmlAttributes: new { @class="control-label"})
+        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @style = "width:300px",@class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "" })
+        
+    </div>
+    <div class="form-group">
+        
+        @Html.LabelFor(model=>model.DiaChi,htmlAttributes: new {@class="control-label" })
+        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @style = "width:300px", @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "" })
+
+
+    </div>
+
+    <div class="form-group">
+          <button type="submit" class="btn btn-danger btn-md">Submit</button>
+    </div>
+    </div>
+}
+<script type="text/javascript">
+         <!--
+            function getConfirmation(){
+               var retVal = confirm("Do you want to continue ?");
+               if( retVal == true ){
+               
+                   
+                   return true;
+               }
+               else{
+                
+                  return false;
+               }
+            }
+         //-->
+</script>
