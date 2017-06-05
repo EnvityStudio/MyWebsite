@@ -43,6 +43,16 @@ namespace MyWebsite.Models.DAO
                        select p);
             return res;
         }
+        public int FindIdCategory(string name)
+        {
+            return db.SAN_PHAM.Single(m => m.TenSP == name).MaDM;
+        }
+        
+        public List<SAN_PHAM> SearchListSP(int idCategory, string name,float priceFrom, float priceTo)
+        {
+            List<SAN_PHAM> list = db.SAN_PHAM.SqlQuery(@"search '" +idCategory+"','"+name+"','"+priceFrom+"','"+priceTo+"").ToList();
+            return list;
+        }
         public IQueryable<SAN_PHAM> ListProductFeatured()
         {
             var res = (from p in db.SAN_PHAM

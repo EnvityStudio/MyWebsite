@@ -1,0 +1,149 @@
+﻿@model IEnumerable<MyWebsite.Models.Entities.SAN_PHAM>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-left">
+            <div class="block block-layered-nav">
+                <div class="block-title">
+
+                </div>
+                <div class="block-content">
+                    <p class="block-subtitle">Shopping Options</p>
+                    <form action="Search" method="post" class="content-shopby">
+                        <div id="narrow-by-list">
+                            <div class="layered layered-Category">
+                                <h2>Category</h2>
+                                <div class="content-shopby">
+                                    <input type="text" name="nameCategory" placeholder="Name Category..." class="form-control">
+                                </div>
+                                </div>
+                             <div class="layered layered-Category">
+                            <h2>Price</h2>
+                            <div class="content-shopby">
+                                    <input type="text" name="price" placeholder="Price products..." class="form-control">
+                                </div>
+                        </div>
+                        <div class="layered layered-Manufacturer">
+                            <h2>Name</h2>
+                            <div class="content-shopby">
+                                <input type="text" name="name" placeholder="Name products..." class="form-control"><br />
+                                <input type="submit" value="Show" class="btn btn-default"/>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                        </form>
+                </div>
+           
+
+            </div><!-- /sort -->
+            <div class="block block-list">
+                <div class="block-title">
+                </div>
+                <div class="block-content">
+                </div>
+            </div><!-- /.compare -->
+            <div class="banner-left">
+
+            </div>
+            <!-- /.block - Special offer -->
+        </div><!-- /.col-left -->
+        <div class="col-sm-9 col-right">
+            <div class="banner">
+
+            </div>
+            <div class="page-title">
+                <h1>CATEGORY LIST</h1>
+            </div>
+            <div class="toolbar">
+                <div class="sorter">
+                    <p class="view-mode">
+                        <label>View as:</label>
+                        <a class="grid" title="Grid" href="#">Grid</a>&nbsp;
+                        <strong class="list" title="Lit">List</strong>&nbsp;
+                    </p>
+                </div><!-- /.sorter -->
+                <div class="pager">
+                    <div class="sort-by hidden-xs">
+                    </div>
+                    <div class="limiter hidden-xs">
+                    </div>
+                </div>
+            </div><!-- /.pager -->
+        </div><!-- /.toolbar -->
+        <div class="col-sm-9 col-right">
+            <ol id="products-list" class="products-list">
+                @foreach (var item in Model)
+            {
+                if (item != null)
+                {
+                        <li class="item">
+                            <div class="item-inner">
+                                <div class="row">
+                                    <div class="col-sm-4 col-sms-4 col-smb-12">
+                                        <div class="images-container">
+                                            <div class="product_icon">
+                                                <div class="new-icon">
+                                                    <span>new</span>
+                                                </div>
+                                            </div>
+                                            <a class="product-image" title="@item.TenSP" href="#" rel="author">
+                                                <img alt="@item.TenSP" src="@item.HinhAnh">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-shop col-sm-8 col-sms-8 col-smb-12">
+                                        <div class="f-fix">
+                                            <h2 class="product-name"><a title="Primis in faucibus" href="#">@item.TenSP</a></h2>
+                                            <div class="ratings">
+                                                <div class="rating-box">
+                                                    <div style="width:67%" class="rating"></div>
+                                                </div>
+                                                <span class="amount"><a href="#">1 Review(s)</a></span>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="regular-price">
+                                                    <span class="price">@item.DonGia</span>
+                                                </span>
+                                            </div>
+
+                                            <div class="actions">
+                                                <div class="actions-inner">
+                                                
+                                              <button class="btn btn-danger" title="Add to Cart" type="button">@Html.ActionLink("Add to Cart", "Add", "BakeryCart", new { ID = @item.MaSP }, null)</button>
+                                            <ul class="add-to-links"></ul>
+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+
+            </ol>
+        </div>
+        <div class="toolbar">
+            <div class="sorter">
+                <p class="view-mode">
+                    <label>View as:</label>
+                    <a class="grid" title="Grid" href="#">Grid</a>&nbsp;
+                    <strong class="list" title="Lit">List</strong>&nbsp;
+                </p>
+            </div><!-- /.sorter -->
+            <div class="pager">
+                <div class="sort-by hidden-xs">
+                </div>
+                <div class="limiter hidden-xs">
+                </div>
+            </div>
+        </div><!-- /.pager -->
+    </div><!-- /.toolbar -->
+</div><!-- /.col-right -->

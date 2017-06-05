@@ -17,7 +17,7 @@
     
     <div class="container">
         <div class="cart">
-            <form>
+            
                 <div class="table-responsive">
                     <table class="table custom-table">
                         <thead>
@@ -32,9 +32,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                          
                             @foreach (var item in Model)
                             {
-
+                                
                                 <tr>
                                     <td class="text-center"><a class="btn-remove" href="Delete/@item.ID"><span class="fa fa-trash-o"></span></a></td>
                                     <td>
@@ -70,8 +71,9 @@
                 </div>
                 <div class="text-right">
                     <a href="/Home/Index" class="btn btn-default btn-md">CONTINUE SHOPPING</a>
-                    <a href="/BakeryCart/UpdateAmount" class="btn btn-danger btn-md">UPDATE SHOPPING CART</a>
+                    <a href="/BakeryCart/UpdateAmount?id=1?quantity=10" id ="btnUpdate"class="btn btn-danger btn-md">UPDATE SHOPPING CART</a>
                 </div>
+            
                 <div class="line2"></div>
                 <div class="row">
                 
@@ -95,14 +97,27 @@
                                 <td>Grandtotal:</td>
                                 <td class="text-right">@totalMoney</td>
                             </tr>
-                        </table>
-                        <div class="text-right">
-                            <a href="Pay"><button type="button" class="btn btn-default btn-md fwb">PAY</button></a>
-                            
+                        </table><div class="col-sm-6">
+                                    <form action="/BakeryCart/Pay" method="post">
+
+                                        <div class="form-group">
+                                            Tên Khách Hàng<input name="name" type="text" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            Địa Chỉ<input type="text" name="address" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            Số Điện Thoại<input type="text" name="phone" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="submit" value="Đặt Hàng" />
+                                        </div>
+                                    </form>
                          </div>
                     </div>
                 </div>
-            </form>
+            
         </div>
     </div>
 </div>

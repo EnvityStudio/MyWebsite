@@ -13,7 +13,10 @@ namespace MyWebsite.Controllers
     public class BakeryCartController : Controller
     {
         private MyDbContext db = new MyDbContext();
-        public ActionResult Add(int id)
+
+        private HoaDonDAO hoaDonDAO;
+        private KhachHangDao khDao;
+            public ActionResult Add(int id)
         {
 
             BakeryCart Cart = (BakeryCart)Session["cart"];
@@ -60,28 +63,34 @@ namespace MyWebsite.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Pay([Bind(Include = "TenKH,DiaChi,SDT,TrangThai")] KHACH_HANG kHACH_HANG)
-
+        public ActionResult Pay(string name,string address,string phone)
         {
-            if (ModelState.IsValid)
-            {
-                Object[] kh =
-                {
-                    new SqlParameter ("@tenKH",kHACH_HANG.TenKH),
-                    new SqlParameter ("@diaChi",kHACH_HANG.DiaChi),
-                    new SqlParameter ("@sdt",kHACH_HANG.SDT)
-                };
-                int? res = db.Database.SqlQuery<int>("GetLastMaKH @tenKH, @diaChi, @sdt",kh).SingleOrDefault();
-                if (res == null)
-                {
+            hoaDonDAO = new HoaDonDAO();
+            khDao = new KhachHangDao();
+           int a =  khDao.AddKH(name, address, phone);
+            BakeryCart bakery = (BakeryCart)Session["cart"];
 
-                }
-               
-                db.SaveChanges();
-                return RedirectToAction("List");
+            List<ItemCart> list = new List<ItemCart>();
+            int b = hoaDonDAO.AddHoaDon(a, decimal.Parse(bakery.getTotalCart().ToString()));
+            if(bakery!=null)
+            {
+                list = bakery.List1();
             }
-            return View(kHACH_HANG);
+            foreach(var item in list)
+            {
+                hoaDonDAO.AddChiTietHoaDon(item.ID, b, item.Amount, int.Parse(item.Price.ToString()));
+            }
+
+            return View();
         }
+        public ActionResult tt()
+        {
+            return View();
+        }
+        public ActionResult thanhtoan(string tenkh,string sdt)
+        {   
+            return View();
+        }
+        
     }
 }

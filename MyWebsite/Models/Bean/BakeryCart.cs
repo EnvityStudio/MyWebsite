@@ -72,5 +72,9 @@ namespace MyWebsite.Models.Bean
             }
             return Amount;
         }
+        public List<ItemCart> List1()
+        {
+            return list;
+        }
     }
 }

@@ -123,19 +123,10 @@
                                 </div>
                             </div>
                         </div><!-- /.support-client -->
-                        <form class="form-search">
-                            <input type="text" class="input-text" name="q" id="search" placeholder="Search products...">
-                            <div class="dropdown">
-                                <button type="button" class="btn" data-toggle="dropdown">All category <span class="fa fa-angle-down"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    @{
-                                        CategoryDAO cat = new CategoryDAO();
-                                        foreach (var item in cat.ListCategory())
-                                        {
-                                            <li><a href="#">@item.TenDM</a></li>
-                                        }
-                                    }
-                                </ul>
+                        <form class="form-search" method="post"action="/Search/Search">
+                            <input type="text" class="input-text" name="name" id="search" placeholder="Search products...">
+                     
+                              <div class="dropdown">
                             </div>
                             <button type="submit" class="btn btn-danger"><span class="fa fa-search"></span></button>
                         </form>

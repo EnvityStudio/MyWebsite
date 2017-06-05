@@ -208,10 +208,13 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\San_PhamController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Models\DAO\AdminDAO.cs" />
     <Compile Include="Models\Bean\BakeryCart.cs" />
     <Compile Include="Models\DAO\CategoryDAO.cs" />
     <Compile Include="Models\DAO\CustomerDAO.cs" />
+    <Compile Include="Models\DAO\HoaDonDAO.cs" />
+    <Compile Include="Models\DAO\KhachHangDao.cs" />
     <Compile Include="Models\DAO\ProductDAO.cs" />
     <Compile Include="Models\DTO\ProductDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -756,6 +759,7 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cart.js" />
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\cloud-zoom.css" />
@@ -1122,6 +1126,8 @@
     <Content Include="Views\SAN_PHAM\Add.cshtml" />
     <Content Include="Views\BakeryCart\List.cshtml" />
     <Content Include="Views\BakeryCart\Pay.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\BakeryCart\tt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
