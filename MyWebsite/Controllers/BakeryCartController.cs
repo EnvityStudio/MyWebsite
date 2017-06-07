@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.SqlClient;
+using System.Web.Script.Serialization;
 
 namespace MyWebsite.Controllers
 {
@@ -31,6 +32,8 @@ namespace MyWebsite.Controllers
         }
         public ActionResult List()
         {
+            KhachHangDao kh = new KhachHangDao();
+            ViewBag.khachhang = kh.ListKH();
             BakeryCart Cart = (BakeryCart)Session["cart"];
             List<ItemCart> ls = new List<ItemCart>();
             if (Cart != null)
@@ -91,6 +94,23 @@ namespace MyWebsite.Controllers
         {   
             return View();
         }
+        public JsonResult Update(string cartModel)
+        {
+            var cart = new JavaScriptSerializer().Deserialize<List<ItemCart>>(cartModel);
+            var sessionCart = (List<ItemCart>)Session["cart"];
+            foreach(var item in  sessionCart)
+            {
+                var jsonItem = cart.SingleOrDefault(x => x.ID == item.ID);
+                 if (jsonItem != null)
+                {
+                    item.Amount = jsonItem.Amount;
+                }
+            }
+            return Json(new { status = true });
+        
+        }
+
+
         
     }
 }

@@ -23,6 +23,14 @@ namespace MyWebsite.Models.DAO
             db.SaveChanges();
             return kh.MaKH;
         }
+        public IQueryable<KHACH_HANG> ListKH()
+        {
+            var res = (from p in db.KHACH_HANG
+                       where p.TrangThai == true
+                       orderby p.MaKH ascending
+                       select p);
+            return res;
+        }
 
     }
 }

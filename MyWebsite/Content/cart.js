@@ -10,13 +10,13 @@
             });
 
             $.ajax({
-                url: '/BakeryCart/UpdateAmount',
+                url: '/BakeryCart/Update',
                 data: { cartModel: JSON.stringify(cartList) },
                 dataType: 'json',
                 type: 'POST',
                 success: function (res) {
                     if (res.status == true) {
-                        window.location.href = "/gio-hang";
+                        window.location.href = "/Bakery/List";
                     }
                 }
             })

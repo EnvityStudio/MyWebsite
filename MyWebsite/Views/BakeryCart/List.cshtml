@@ -71,8 +71,9 @@
                 </div>
                 <div class="text-right">
                     <a href="/Home/Index" class="btn btn-default btn-md">CONTINUE SHOPPING</a>
-                    <a href="/BakeryCart/UpdateAmount?id=1?quantity=10" id ="btnUpdate"class="btn btn-danger btn-md">UPDATE SHOPPING CART</a>
-                </div>
+                    @*<a href="/BakeryCart/UpdateAmount?id=1?quantity=10" id ="btnUpdate"class="btn btn-danger btn-md">UPDATE SHOPPING CART</a>*@
+                    <button type="submit" class="btn btn-danger btn-md" id="btnUpdate">UPDATE SHOPPING CART</button>
+                 </div>
             
                 <div class="line2"></div>
                 <div class="row">
@@ -99,7 +100,6 @@
                             </tr>
                         </table><div class="col-sm-6">
                                     <form action="/BakeryCart/Pay" method="post">
-
                                         <div class="form-group">
                                             Tên Khách Hàng<input name="name" type="text" class="form-control" />
                                         </div>
@@ -109,7 +109,6 @@
                                         <div class="form-group">
                                             Số Điện Thoại<input type="text" name="phone" class="form-control" />
                                         </div>
-
                                         <div class="form-group">
                                             <input type="submit" value="Đặt Hàng" />
                                         </div>

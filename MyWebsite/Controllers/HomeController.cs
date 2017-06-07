@@ -18,7 +18,6 @@ namespace MyWebsite.Controllers
             ViewBag.listRandom = pro.ListRandom();
             ViewBag.listCheapest = pro.ListCheapest();
             ViewBag.listUpsell = pro.ListUpsellProduct();
-            
             return View();
         }
         public ActionResult Footer()
